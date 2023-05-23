@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../../230504-124438-arduino-blink"
+		},
+		{
+			"name": "test123",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.json.liquid": "json",
+			"*.yaml.liquid": "yaml",
+			"*.md.liquid": "markdown",
+			"*.js.liquid": "liquid-javascript",
+			"*.css.liquid": "liquid-css",
+			"*.scss.liquid": "liquid-scss",
+			"*.tcc": "cpp",
+			"string": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp",
+			"string_view": "cpp"
+		}
+	}
+}
