@@ -1,11 +1,7 @@
-#include "data.h"
-#include "internet.h"
-#include "mqtt.h"
+#include "main.h"
 
 Data data;
 MQTTClient mqtt;
-void connectToMqtt();
-void checkMqttConnection();
 
 void setup()
 {
@@ -41,7 +37,7 @@ void loop()
 
     // delay(1000);
 
-    // mqtt.publish("test", "test message.");
+    // mqtt.publish("test", "1");
 }
 
 void connectToMqtt()

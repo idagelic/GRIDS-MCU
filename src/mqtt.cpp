@@ -1,8 +1,50 @@
 #include "mqtt.h"
-#include "domain.h"
+// #include "domain.h"
+
+const int TEST_RELAY_PIN_NUMBER = 13; // Replace with the desired pin number
+
+const char *SESSION_INIT = "/commands/session-init";
+const char *SESSION_STOP = "/commands/session-stop";
+const char *FUNCTION_PARAMS = "/commands/function-parameters";
+const char *PTMAX = "/commands/ptmax";
+const char *REVERT_TO_DEFAULT = "/commands/revert-to-default";
+const char *ENERGY_DELIVERY_START = "/commands/energy-delivery-start";
+const char *ENERGY_DELIVERY_STOP = "/commands/energy-delivery-stop";
+const char *ELECTRICITY_DATA_INTERVAL = "/commands/electricity-data-interval";
+const char *RELAY_TEST_ON = "/commands/relay-test-on";
+const char *RELAY_TEST_OFF = "/commands/relay-test-off";
+
+const char *ELECTRICITY_DATA = "electricity-data";
+const char *POWER_EXCEEDED = "power-exceeded";
+const char *ENERGY_DELIVERY_STOPPED = "energy-delivery-stopped";
+const char *SESSION_STOPPED = "session-stopped";
+
+const char *TOPIC_DELIMITER = "/";
+
+const char *READ_TOPICS[] = {
+    SESSION_INIT,
+    SESSION_STOP,
+    FUNCTION_PARAMS,
+    PTMAX,
+    REVERT_TO_DEFAULT,
+    ENERGY_DELIVERY_START,
+    ENERGY_DELIVERY_STOP,
+    ELECTRICITY_DATA_INTERVAL,
+    RELAY_TEST_ON, RELAY_TEST_OFF};
+
+const char *WRITE_TOPICS[] = {
+    ELECTRICITY_DATA,
+    POWER_EXCEEDED,
+    ENERGY_DELIVERY_STOPPED,
+    SESSION_STOPPED};
+
+const int readTopicCount = sizeof(READ_TOPICS) / sizeof(READ_TOPICS[0]);
+
+const char *CLIENT_NAME = "ESP32Client";
+const int BUFFER_SIZE = 4096;
 
 MQTTClient *MQTTClient::instance = nullptr;
-Domain domain;
+// Domain domain;
 
 void MQTTClient::connect(const char *brokerUrl, int port, const char *username, const char *password, const char *certificate)
 {
@@ -110,6 +152,18 @@ void MQTTClient::callback(char *topic, byte *payload, unsigned int length)
         // Serial.println(p_tmax);
         // Serial.print("timeout set to: ");
         // Serial.println(timeout);
+    }
+
+    if (strcmp(topic, strcat(uuidCharArray, RELAY_TEST_ON)) == 0)
+    {
+        Serial.println("Doslo on");
+        digitalWrite(TEST_RELAY_PIN_NUMBER, HIGH); // Replace with real pin number
+    }
+
+    if (strcmp(topic, strcat(uuidCharArray, RELAY_TEST_OFF)) == 0)
+    {
+        Serial.println("Doslo off");
+        digitalWrite(TEST_RELAY_PIN_NUMBER, LOW); // Replace with real pin number
     }
 }
 

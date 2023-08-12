@@ -1,6 +1,6 @@
 uuid=b032f153-9cb3-4a8a-bdd6-6429d14c9505;
-ssid=Kocka.LAN;
-password=jawa50.GP;
+ssid=KRUG Solin;
+password=Krug2023;
 mqttBrokerURL=4d640255af9a4b86a076f2ba11a08d58.s2.eu.hivemq.cloud;
 mqttBrokerPort=8883;
 mqttUser=GRIDS_USER;
