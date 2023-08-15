@@ -25,7 +25,7 @@ void loop()
     //     mqttClient.mqttReconnect();
     // }
     // mqttClient.loop();
-    // data.checkSerialInput();
+    data.checkSerialInput();
     // String ssid = data.getConfigField("ssid");
     // String password = data.getConfigField("password");
     // checkWifiConnection(ssid.c_str(), password.c_str());

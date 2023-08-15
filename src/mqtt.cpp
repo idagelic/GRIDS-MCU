@@ -1,7 +1,8 @@
 #include "mqtt.h"
 // #include "domain.h"
 
-const int TEST_RELAY_PIN_NUMBER = 13; // Replace with the desired pin number
+const int PIN_REL1 = 2; // Replace with the desired pin number
+const int PIN_REL2 = 4; // Replace with the desired pin number
 
 const char *SESSION_INIT = "/commands/session-init";
 const char *SESSION_STOP = "/commands/session-stop";
@@ -13,6 +14,7 @@ const char *ENERGY_DELIVERY_STOP = "/commands/energy-delivery-stop";
 const char *ELECTRICITY_DATA_INTERVAL = "/commands/electricity-data-interval";
 const char *RELAY_TEST_ON = "/commands/relay-test-on";
 const char *RELAY_TEST_OFF = "/commands/relay-test-off";
+const char *RELAY_TEST_KICK = "/commands/relay-test-kick";
 
 const char *ELECTRICITY_DATA = "electricity-data";
 const char *POWER_EXCEEDED = "power-exceeded";
@@ -30,7 +32,7 @@ const char *READ_TOPICS[] = {
     ENERGY_DELIVERY_START,
     ENERGY_DELIVERY_STOP,
     ELECTRICITY_DATA_INTERVAL,
-    RELAY_TEST_ON, RELAY_TEST_OFF};
+    RELAY_TEST_ON, RELAY_TEST_OFF, RELAY_TEST_KICK};
 
 const char *WRITE_TOPICS[] = {
     ELECTRICITY_DATA,
@@ -100,6 +102,8 @@ void MQTTClient::callback(char *topic, byte *payload, unsigned int length)
     int uuidLength = this->uuid.length();
     char uuidCharArray[37];
     uuid.toCharArray(uuidCharArray, sizeof(uuidCharArray));
+    char tempUuidCharArray[37];
+    strcpy(tempUuidCharArray, uuidCharArray);
 
     // Parse JSON data
     Serial.println("test1");
@@ -124,7 +128,7 @@ void MQTTClient::callback(char *topic, byte *payload, unsigned int length)
     // Forward topic data to respective function
 
     // Check if message is on init-session topic
-    if (strcmp(topic, strcat(uuidCharArray, SESSION_INIT)) == 0)
+    if (strcmp(topic, strcat(tempUuidCharArray, SESSION_INIT)) == 0)
     {
         // get each json field and send them separately to domain
 
@@ -138,10 +142,13 @@ void MQTTClient::callback(char *topic, byte *payload, unsigned int length)
         // Serial.print("p_max set to: ");
         // Serial.println(domain.pMax);
     }
+    memset(tempUuidCharArray, 0, sizeof(tempUuidCharArray));
+    strcpy(tempUuidCharArray, uuidCharArray);
+
     Serial.println("test7");
 
     // Check if message is on update-session topic
-    if (strcmp(topic, strcat(uuidCharArray, "commands/update-session")) == 0)
+    if (strcmp(topic, strcat(tempUuidCharArray, "commands/update-session")) == 0)
     {
         // int max_power = doc["max_power"];
         // int duration = doc["duration"];
@@ -153,18 +160,34 @@ void MQTTClient::callback(char *topic, byte *payload, unsigned int length)
         // Serial.print("timeout set to: ");
         // Serial.println(timeout);
     }
+    memset(tempUuidCharArray, 0, sizeof(tempUuidCharArray));
+    strcpy(tempUuidCharArray, uuidCharArray);
 
-    if (strcmp(topic, strcat(uuidCharArray, RELAY_TEST_ON)) == 0)
+    if (strcmp(topic, strcat(tempUuidCharArray, RELAY_TEST_ON)) == 0)
     {
-        Serial.println("Doslo on");
-        digitalWrite(TEST_RELAY_PIN_NUMBER, HIGH); // Replace with real pin number
+        Serial.println("Pin 1 on.");
+        digitalWrite(PIN_REL1, HIGH); // Replace with real pin number
     }
+    memset(tempUuidCharArray, 0, sizeof(tempUuidCharArray));
+    strcpy(tempUuidCharArray, uuidCharArray);
 
-    if (strcmp(topic, strcat(uuidCharArray, RELAY_TEST_OFF)) == 0)
+    if (strcmp(topic, strcat(tempUuidCharArray, RELAY_TEST_OFF)) == 0)
     {
-        Serial.println("Doslo off");
-        digitalWrite(TEST_RELAY_PIN_NUMBER, LOW); // Replace with real pin number
+        Serial.println("Pin 1 off.");
+        digitalWrite(PIN_REL1, LOW); // Replace with real pin number
     }
+    memset(tempUuidCharArray, 0, sizeof(tempUuidCharArray));
+    strcpy(tempUuidCharArray, uuidCharArray);
+
+    if (strcmp(topic, strcat(tempUuidCharArray, RELAY_TEST_KICK)) == 0)
+    {
+        Serial.println("Kicking pin 2");
+        digitalWrite(PIN_REL2, LOW); // Replace with real pin number
+    }
+    memset(tempUuidCharArray, 0, sizeof(tempUuidCharArray));
+    strcpy(tempUuidCharArray, uuidCharArray);
+
+    Serial.println(tempUuidCharArray);
 }
 
 void MQTTClient::checkReconnect()
