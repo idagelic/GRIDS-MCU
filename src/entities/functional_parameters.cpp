@@ -1,5 +1,7 @@
 #include "functional_parameters.h"
 
+FunctionalParameters::FunctionalParameters() {}
+
 FunctionalParameters::FunctionalParameters(int pMaxActionThreshold, int pMaxActionDelay, int energyDeliveryStopDelay, int energyMessageInterval)
 {
     this->pMaxActionThreshold = pMaxActionThreshold;

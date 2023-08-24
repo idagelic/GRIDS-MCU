@@ -4,6 +4,7 @@
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
+#include "internet.h"
 
 class MQTTClient
 {
@@ -12,6 +13,7 @@ public:
     WiFiClientSecure espClient;
     PubSubClient client;
     String uuid;
+    void connectToWiFi(const char *ssid, const char *password);
     void connect(const char *brokerUrl, int port, const char *username, const char *password, const char *certificate);
     static void staticCallback(char *topic, byte *payload, unsigned int length);
     void callback(char *topic, byte *payload, unsigned int length);

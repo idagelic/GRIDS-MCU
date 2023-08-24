@@ -1,5 +1,7 @@
 #include "energy_message.h"
 
+EnergyMessage::EnergyMessage() {}
+
 EnergyMessage::EnergyMessage(int counter, int sessionId, float kWhCumulativeEnergy, float wattAveragePower)
 {
     this->counter = counter;

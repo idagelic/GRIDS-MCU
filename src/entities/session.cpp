@@ -1,5 +1,7 @@
 #include "session.h"
 
+Session::Session() {}
+
 Session::Session(int id, int pMax, int tPMax, int tPMaxTimeout, bool energyDeliveryStatus, float kWhCumulativeEnergy, int energyMessageInterval)
 {
     this->id = id;

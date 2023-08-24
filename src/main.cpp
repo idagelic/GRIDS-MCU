@@ -2,6 +2,9 @@
 
 Data data;
 MQTTClient mqtt;
+Domain domain;
+
+int tempNum = 5;
 
 void setup()
 {
@@ -9,39 +12,48 @@ void setup()
 
     data.setup();
 
-    String ssid = data.getConfigField("ssid");
-    String password = data.getConfigField("password");
-    connectToWiFi(ssid.c_str(), password.c_str());
-
-    connectToMqtt();
+    // connectToMqtt();
 }
 
 void loop()
 {
-    checkMqttConnection();
-
-    // if (!mqttClient.connected())
-    // {
-    //     mqttClient.mqttReconnect();
-    // }
-    // mqttClient.loop();
     data.checkSerialInput();
-    // String ssid = data.getConfigField("ssid");
-    // String password = data.getConfigField("password");
-    // checkWifiConnection(ssid.c_str(), password.c_str());
+    // mqtt.checkReconnect();
+    // mqtt.loop();
 
-    // // Todo: Create "check mqtt connection"...
-    // mqtt.reconnect();
+    delay(3000);
+    testFunctionalParameters();
+}
 
-    mqtt.loop();
+void testFunctionalParameters()
+{
+    const int jsonCapacity = JSON_OBJECT_SIZE(4);
+    DynamicJsonDocument jsonDoc(jsonCapacity);
 
-    // delay(1000);
+    // Create the JSON data
+    jsonDoc["pMaxActionThreshold"] = 2 * tempNum++;
+    jsonDoc["pMaxActionDelay"] = 4 * tempNum++;
+    jsonDoc["energyDeliveryStopDelay"] = 10 * tempNum++;
+    jsonDoc["energyMessageInterval"] = 20 * tempNum++;
 
-    // mqtt.publish("test", "1");
+    domain.processFunctionParams(jsonDoc);
+
+    FunctionalParameters fp = domain.getFunctionalParameters();
+    Serial.println("pMaxActionThreshold: ");
+    Serial.println(fp.getPMaxActionThreshold());
+    Serial.println("pMaxActionDelay: ");
+    Serial.println(fp.getPMaxActionDelay());
+    Serial.println("energyDeliveryStopDelay: ");
+    Serial.println(fp.getEnergyDeliveryStopDelay());
+    Serial.println("Current message interval: ");
+    Serial.println(fp.getEnergyMessageInterval());
 }
 
 void connectToMqtt()
 {
+    String wifiSsid = data.getConfigField("ssid");
+    String wifiPassword = data.getConfigField("password");
+
     String brokerUrl = data.getConfigField("mqttBrokerURL");
     String port = data.getConfigField("mqttBrokerPort");
     String username = data.getConfigField("mqttUser");
@@ -51,10 +63,6 @@ void connectToMqtt()
 
     mqtt.uuid = uuid;
 
+    mqtt.connectToWiFi(wifiSsid.c_str(), wifiPassword.c_str());
     mqtt.connect(brokerUrl.c_str(), atoi(port.c_str()), username.c_str(), password.c_str(), certificate.c_str());
-}
-
-void checkMqttConnection()
-{
-    mqtt.checkReconnect();
 }

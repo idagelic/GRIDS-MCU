@@ -48,6 +48,11 @@ const int BUFFER_SIZE = 4096;
 MQTTClient *MQTTClient::instance = nullptr;
 // Domain domain;
 
+void MQTTClient::connectToWiFi(const char *ssid, const char *password)
+{
+    connectToWiFi(ssid, password);
+}
+
 void MQTTClient::connect(const char *brokerUrl, int port, const char *username, const char *password, const char *certificate)
 {
     espClient.setCACert(certificate);

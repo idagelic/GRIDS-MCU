@@ -17,6 +17,9 @@ class Domain
 {
 public:
     Domain();
+
+    FunctionalParameters getFunctionalParameters();
+
     void processSessionInit(DynamicJsonDocument);
     void processSessionStop(DynamicJsonDocument);
     void processFunctionParams(DynamicJsonDocument);

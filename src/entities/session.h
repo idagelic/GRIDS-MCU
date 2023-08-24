@@ -2,7 +2,6 @@
 #define SESSION_H
 
 #include <time.h>
-
 class Session
 {
 public:
