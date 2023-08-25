@@ -20,7 +20,6 @@ public:
 
     FunctionalParameters getFunctionalParameters();
 
-    void test11();
     void processSessionInit(DynamicJsonDocument);
     void processSessionStop(DynamicJsonDocument);
     void processFunctionParams(DynamicJsonDocument);

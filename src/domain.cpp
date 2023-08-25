@@ -2,11 +2,6 @@
 
 Domain::Domain() {}
 
-void Domain::test11()
-{
-    Serial.println("domain writing");
-}
-
 FunctionalParameters Domain::getFunctionalParameters()
 {
     return functionalParameters;
