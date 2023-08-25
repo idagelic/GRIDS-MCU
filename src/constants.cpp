@@ -1,9 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-// const int PIN_REL1 = 2; // Replace with the desired pin number
-// const int PIN_REL2 = 4; // Replace with the desired pin number
-
 const char *SESSION_INIT = "/commands/session-init";
 const char *SESSION_STOP = "/commands/session-stop";
 const char *FUNCTION_PARAMS = "/commands/function-parameters";
@@ -39,8 +36,6 @@ const char *WRITE_TOPICS[] = {
 	POWER_EXCEEDED,
 	ENERGY_DELIVERY_STOPPED,
 	SESSION_STOPPED};
-
-// const int BUFFER_SIZE = 4096;
 
 const char *CLIENT_NAME = "ESP32Client";
 

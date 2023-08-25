@@ -2,7 +2,6 @@
 
 Data data;
 MQTTClient mqtt;
-// Domain domain;
 Actions actions;
 
 int tempNum = 5;
