@@ -2,11 +2,6 @@
 
 Actions::Actions() {}
 
-int Actions::test1()
-{
-    return 456;
-}
-
 void Actions::processMessage(String uuid, char *topic, byte *payload, unsigned int length)
 {
     Serial.print("Message received on topic: ");

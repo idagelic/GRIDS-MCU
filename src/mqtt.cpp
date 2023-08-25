@@ -30,12 +30,14 @@ void MQTTClient::connect(const char *brokerUrl, int port, const char *username, 
 
             if (this->uuid)
             {
-                for (int i = 0; i < readTopicCount; i++)
+                int i = 0;
+                while (READ_TOPICS[i] != nullptr)
                 {
                     topic = this->uuid + READ_TOPICS[i];
                     Serial.println("Subscribing to ");
                     Serial.println(topic);
                     Serial.println(client.subscribe(topic.c_str()));
+                    i++;
                 }
             }
         }
@@ -66,12 +68,14 @@ void MQTTClient::checkReconnect()
         {
             Serial.println("Connected!");
 
-            for (int i = 0; i < readTopicCount; i++)
+            int i = 0;
+            while (READ_TOPICS[i] != nullptr)
             {
                 String topic = this->uuid + READ_TOPICS[i];
                 Serial.println("Subscribing to ");
                 Serial.println(topic);
                 Serial.println(client.subscribe(topic.c_str()));
+                i++;
             }
         }
         else

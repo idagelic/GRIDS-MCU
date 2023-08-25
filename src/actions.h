@@ -9,7 +9,6 @@ class Actions
 {
 public:
 	Actions();
-	int test1();
 	static void processMessage(String uuid, char *topic, byte *payload, unsigned int length);
 };
 

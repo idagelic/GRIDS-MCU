@@ -3,6 +3,7 @@
 Data data;
 MQTTClient mqtt;
 Domain domain;
+Actions actions;
 
 int tempNum = 5;
 
@@ -13,6 +14,7 @@ void setup()
     data.setup();
 
     connectToMqtt();
+    mqtt.actions = actions;
 }
 
 void loop()
