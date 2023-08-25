@@ -2,6 +2,8 @@
 #define ACTIONS_H
 
 #include <WiFi.h>
+#include <ArduinoJson.h>
+#include "constants.h"
 
 class Actions
 {

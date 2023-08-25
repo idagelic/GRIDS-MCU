@@ -34,7 +34,7 @@ void Actions::processMessage(String uuid, char *topic, byte *payload, unsigned i
     Serial.println("test5");
 
     Serial.println(uuidCharArray);
-    Serial.println(this->uuid);
+    Serial.println(uuid);
     Serial.println("test6");
 
     // Forward topic data to respective function
