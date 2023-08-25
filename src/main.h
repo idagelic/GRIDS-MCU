@@ -3,12 +3,12 @@
 
 #include "data.h"
 // #include "internet.h"
-#include "mqtt.h"
-#include "domain.h"
+// #include "mqtt.h"
+// #include "domain.h"
 
 extern Data data;
-extern MQTTClient mqtt;
-extern Domain domain;
+// extern MQTTClient mqtt;
+// extern Domain domain;
 
 void testFunctionalParameters();
 void connectToMqtt();
