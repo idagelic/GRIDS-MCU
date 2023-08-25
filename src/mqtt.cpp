@@ -1,8 +1,6 @@
 #include "mqtt.h"
-// #include "domain.h"
 
 MQTTClient *MQTTClient::instance = nullptr;
-// Domain domain;
 
 void MQTTClient::initWifiConnection(const char *ssid, const char *password)
 {

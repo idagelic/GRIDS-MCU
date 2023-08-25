@@ -2,7 +2,7 @@
 
 Data data;
 MQTTClient mqtt;
-Domain domain;
+// Domain domain;
 Actions actions;
 
 int tempNum = 5;
@@ -27,29 +27,29 @@ void loop()
     // testFunctionalParameters();
 }
 
-void testFunctionalParameters()
-{
-    const int jsonCapacity = JSON_OBJECT_SIZE(4);
-    DynamicJsonDocument jsonDoc(jsonCapacity);
+// void testFunctionalParameters()
+// {
+//     const int jsonCapacity = JSON_OBJECT_SIZE(4);
+//     DynamicJsonDocument jsonDoc(jsonCapacity);
 
-    // Create the JSON data
-    jsonDoc["pMaxActionThreshold"] = 2 * tempNum++;
-    jsonDoc["pMaxActionDelay"] = 4 * tempNum++;
-    jsonDoc["energyDeliveryStopDelay"] = 10 * tempNum++;
-    jsonDoc["energyMessageInterval"] = 20 * tempNum++;
+//     // Create the JSON data
+//     jsonDoc["pMaxActionThreshold"] = 2 * tempNum++;
+//     jsonDoc["pMaxActionDelay"] = 4 * tempNum++;
+//     jsonDoc["energyDeliveryStopDelay"] = 10 * tempNum++;
+//     jsonDoc["energyMessageInterval"] = 20 * tempNum++;
 
-    domain.processFunctionParams(jsonDoc);
+//     domain.processFunctionParams(jsonDoc);
 
-    FunctionalParameters fp = domain.getFunctionalParameters();
-    Serial.println("pMaxActionThreshold: ");
-    Serial.println(fp.getPMaxActionThreshold());
-    Serial.println("pMaxActionDelay: ");
-    Serial.println(fp.getPMaxActionDelay());
-    Serial.println("energyDeliveryStopDelay: ");
-    Serial.println(fp.getEnergyDeliveryStopDelay());
-    Serial.println("Current message interval: ");
-    Serial.println(fp.getEnergyMessageInterval());
-}
+//     FunctionalParameters fp = domain.getFunctionalParameters();
+//     Serial.println("pMaxActionThreshold: ");
+//     Serial.println(fp.getPMaxActionThreshold());
+//     Serial.println("pMaxActionDelay: ");
+//     Serial.println(fp.getPMaxActionDelay());
+//     Serial.println("energyDeliveryStopDelay: ");
+//     Serial.println(fp.getEnergyDeliveryStopDelay());
+//     Serial.println("Current message interval: ");
+//     Serial.println(fp.getEnergyMessageInterval());
+// }
 
 void connectToMqtt()
 {

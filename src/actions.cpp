@@ -1,6 +1,11 @@
 #include "actions.h"
 
-Actions::Actions() {}
+Actions *Actions::instance = nullptr;
+
+Actions::Actions()
+{
+    instance = this;
+}
 
 void Actions::processMessage(String uuid, char *topic, byte *payload, unsigned int length)
 {
@@ -95,4 +100,6 @@ void Actions::processMessage(String uuid, char *topic, byte *payload, unsigned i
     strcpy(tempUuidCharArray, uuidCharArray);
 
     Serial.println(tempUuidCharArray);
+
+    instance->domain.test11();
 }

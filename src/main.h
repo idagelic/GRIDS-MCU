@@ -4,12 +4,12 @@
 #include "data.h"
 // #include "internet.h"
 #include "mqtt.h"
-#include "domain.h"
+// #include "domain.h"
 #include "actions.h"
 
 extern Data data;
 extern MQTTClient mqtt;
-extern Domain domain;
+// extern Domain domain;
 extern Actions actions;
 
 void testFunctionalParameters();
